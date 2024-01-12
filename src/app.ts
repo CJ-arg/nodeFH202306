@@ -5,9 +5,8 @@ import { yarg } from "./plugins/args.plugins";
 
 (async () => {
   await main();
-  console.log("directo");
 })();
 
 async function main() {
-  console.log("Main Ejecutado");
+  console.log(yarg);
 }
