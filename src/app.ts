@@ -1,6 +1,9 @@
+import fs from "fs";
+
+let outputMessage = "";
 const lineLong: number = 0;
 let lineItems: string = "";
-
+const tableOf: number = 7;
 const lineMaker = (lineLong: number) => {
   for (let i = 0; i < lineLong; i += 1) {
     lineItems += "=";
@@ -8,13 +11,20 @@ const lineMaker = (lineLong: number) => {
 };
 lineMaker(40);
 
-const tableMaker = (tableOf: number, till: number) => {
-  for (let i = 1; i < till + 1; i += 1) {
-    console.log(`${tableOf} X ${i} = ${tableOf * i}`);
+const tableMaker = (till: number) => {
+  for (let i = 1; i <= till; i += 1) {
+    outputMessage += `   ${tableOf} X ${i} = ${tableOf * i}\n`;
   }
 };
 
-console.log(lineItems);
-console.log("          Tabla del 5");
-console.log(lineItems);
-tableMaker(5, 10);
+tableMaker(10);
+outputMessage = `${lineItems}  
+                      Tabla del ${tableOf}
+${lineItems}  
+
+${outputMessage}  `;
+
+console.log(outputMessage);
+
+fs.writeFileSync(`outputs/tabla-${tableOf}.txt`, outputMessage);
+console.log("File Created OK!!");
