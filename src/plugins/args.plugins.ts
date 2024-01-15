@@ -11,7 +11,7 @@ export const yarg = yargs(hideBin(process.argv))
   .options("l", {
     alias: "limit",
     type: "number",
-    default: 10,
+    default: 11,
     describe: "Multiplication table limit",
   })
   .options("s", {
@@ -20,4 +20,10 @@ export const yarg = yargs(hideBin(process.argv))
     default: false,
     describe: "Show Multiplication table",
   })
+  .check((argv, options) => {
+    // console.log({ argv, options });
+    if (argv.b < 1) throw "Error: base must be grater than 0 ";
+    return true;
+  })
+
   .parseSync();
