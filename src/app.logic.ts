@@ -1,31 +1,26 @@
 import fs from "fs";
 import { yarg } from "./plugins/args.plugins";
+
 const { b: base, l: limit, s: show } = yarg;
 
 let outputMessage = "";
-const lineLong: number = 0;
-let lineItems: string = "";
-const tableOf: number = base;
-const lineMaker = (lineLong: number) => {
-  for (let i = 0; i < lineLong; i += 1) {
-    lineItems += "=";
-  }
-};
-lineMaker(40);
+const headerMessage = `
+==================================
+       Tabla del ${base}
+==================================\n
+`;
 
-const tableMaker = (till: number) => {
-  for (let i = 1; i <= till; i += 1) {
-    outputMessage += `   ${tableOf} X ${i} = ${tableOf * i}\n`;
-  }
-};
+for (let i = 1; i <= limit; i++) {
+  outputMessage += `${base} x ${i} = ${base * i}\n`;
+}
 
-tableMaker(limit);
-outputMessage = `${lineItems}  
-                      Tabla del ${tableOf}
-${lineItems}  
+outputMessage = headerMessage + outputMessage;
 
-${outputMessage}  `;
-if (show) console.log(outputMessage);
+if (show) {
+  console.log(outputMessage);
+}
 
-fs.writeFileSync(`outputs/tabla-${tableOf}.txt`, outputMessage);
+const outputPath = `outputs`;
+
+fs.writeFileSync(`outputs/tabla-${base}.txt`, outputMessage);
 console.log("File Created OK!!");
