@@ -9,7 +9,7 @@ import { ServerApp } from "./presentation/server-app";
 })();
 
 async function main() {
-  console.log(yarg);
-
-  ServerApp.run();
+  // console.log(yarg);
+  const { b: base, l: limit, s: show } = yarg;
+  ServerApp.run({ base, limit, show });
 }
