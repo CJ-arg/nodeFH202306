@@ -11,16 +11,17 @@ export interface Options {
 }
 
 export class SaveFile implements SaveFileUseCase {
-  constructor() {} // repository Storage repository
+  constructor() /** repository: StorageRepository */
+  {}
+
   execute({
     fileContent,
     fileDestination = "outputs",
-    fileName = "table.txt",
+    fileName = "table",
   }: Options): boolean {
     try {
       fs.mkdirSync(fileDestination, { recursive: true });
       fs.writeFileSync(`${fileDestination}/${fileName}.txt`, fileContent);
-      console.log("File created!");
       return true;
     } catch (error) {
       console.error(error);

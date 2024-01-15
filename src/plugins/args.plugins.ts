@@ -20,6 +20,18 @@ export const yarg = yargs(hideBin(process.argv))
     default: false,
     describe: "Show Multiplication table",
   })
+  .options("n", {
+    alias: "name",
+    type: "string",
+    default: "multiplication-table",
+    describe: "File Name",
+  })
+  .options("d", {
+    alias: "destination",
+    type: "string",
+    default: "outputs",
+    describe: "File destination",
+  })
   .check((argv, options) => {
     // console.log({ argv, options });
     if (argv.b < 1) throw "Error: base must be grater than 0 ";

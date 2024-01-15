@@ -22,5 +22,6 @@ if (show) {
 
 const outputPath = `outputs`;
 
-fs.writeFileSync(`outputs/tabla-${base}.txt`, outputMessage);
-console.log("File Created OK!!");
+fs.mkdirSync(outputPath, { recursive: true });
+fs.writeFileSync(`${outputPath}/tabla-${base}.txt`, outputMessage);
+console.log("File created!");
