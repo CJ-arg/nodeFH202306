@@ -6,8 +6,6 @@ describe("create-table.use-case", () => {
     const table = createTable.execute({ base: 6 });
     const rows = table.split("\n").length;
 
-    // console.log(table);
-
     expect(createTable).toBeInstanceOf(CreateTable);
     expect(table).toContain("6 x 2 = 12");
     expect(table).toContain("6 x 9 = 54");
@@ -18,7 +16,7 @@ describe("create-table.use-case", () => {
     const options = { base: 3, limit: 20 };
     const tableCustom = createTable.execute(options);
     const rowsCustom = tableCustom.split("\n").length;
-    console.log(tableCustom);
+
     expect(tableCustom).toContain("3 x 2 = 6");
     expect(tableCustom).toContain("3 x 11 = 33");
     expect(tableCustom).toContain("3 x 20 = 60");
