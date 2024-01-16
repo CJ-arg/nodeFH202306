@@ -6,7 +6,7 @@ describe("save-file.use-case", () => {
     const options = { fileContent: "test content" };
     const result = saveFile.execute(options);
 
-    // expect(rows).toBe(10);
+    expect(result).toBe(true);
   });
   //   test("should create table with custom values", () => {
   //     const createTable = new CreateTable();
