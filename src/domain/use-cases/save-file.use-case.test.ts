@@ -1,22 +1,17 @@
 import { SaveFile } from "./save-file.use-case";
+import fs from "fs";
 
 describe("save-file.use-case", () => {
   test("should save file  with default values", () => {
     const saveFile = new SaveFile();
     const options = { fileContent: "test content" };
     const result = saveFile.execute(options);
-
+    const filePath = "outputs/table.txt";
     expect(result).toBe(true);
-  });
-  //   test("should create table with custom values", () => {
-  //     const createTable = new CreateTable();
-  //     const options = { base: 3, limit: 20 };
-  //     const tableCustom = createTable.execute(options);
-  //     const rowsCustom = tableCustom.split("\n").length;
+    const checkFile = fs.existsSync(filePath);
 
-  //     expect(tableCustom).toContain("3 x 2 = 6");
-  //     expect(tableCustom).toContain("3 x 11 = 33");
-  //     expect(tableCustom).toContain("3 x 20 = 60");
-  //     expect(rowsCustom).toBe(options.limit);
-  //   });
+    const fileContent = fs.readFileSync(filePath, { encoding: "utf-8" });
+    expect(checkFile).toBe(true);
+    expect(fileContent).toBe(options.fileContent);
+  });
 });
