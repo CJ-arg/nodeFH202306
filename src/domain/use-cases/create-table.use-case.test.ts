@@ -20,6 +20,8 @@ describe("create-table.use-case", () => {
     const rowsCustom = tableCustom.split("\n").length;
     console.log(tableCustom);
     expect(tableCustom).toContain("3 x 2 = 6");
-    expect(rowsCustom).toBe(20);
+    expect(tableCustom).toContain("3 x 11 = 33");
+    expect(tableCustom).toContain("3 x 20 = 60");
+    expect(rowsCustom).toBe(options.limit);
   });
 });
