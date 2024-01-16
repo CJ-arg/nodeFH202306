@@ -2,6 +2,14 @@ import { SaveFile } from "./save-file.use-case";
 import fs from "fs";
 
 describe("save-file.use-case", () => {
+  //   beforeEach(() => {
+  //     //clean up
+  //     fs.rmSync("outputs", { recursive: true });
+  //   });
+  afterEach(() => {
+    //clean up
+    fs.rmSync("outputs", { recursive: true });
+  });
   test("should save file  with default values", () => {
     const saveFile = new SaveFile();
     const options = { fileContent: "test content" };
