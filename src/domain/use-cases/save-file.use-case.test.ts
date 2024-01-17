@@ -7,10 +7,8 @@ describe("save-file.use-case", () => {
     fileDestination: "custom-outputs/file-destination",
     fileName: "custom-table-name",
   };
-  //   beforeEach(() => {
-  //     //clean up
-  //     fs.rmSync("outputs", { recursive: true });
-  //   });
+  const filePath = `${customOptions.fileDestination}/${customOptions.fileName}.txt`;
+
   afterEach(() => {
     const folderExist = fs.existsSync("outputs");
     //clean up
@@ -33,7 +31,7 @@ describe("save-file.use-case", () => {
   test("should save file  with custom values", () => {
     const saveFile = new SaveFile();
     const options = { fileContent: customOptions.fileContent };
-    const filePath = `${customOptions.fileDestination}/${customOptions.fileName}.txt`;
+
     const result = saveFile.execute(customOptions);
     const checkFile = fs.existsSync(filePath);
     const fileContent = fs.readFileSync(filePath, { encoding: "utf-8" });
@@ -41,5 +39,24 @@ describe("save-file.use-case", () => {
     expect(result).toBe(true);
     expect(checkFile).toBe(true);
     expect(fileContent).toBe(options.fileContent);
+  });
+  test("should return false if could not  create directory", () => {
+    const saveFile = new SaveFile();
+    const mkdirSpy = jest.spyOn(fs, "mkdirSync").mockImplementation(() => {
+      throw new Error("This error was created for testing");
+    });
+
+    const result = saveFile.execute(customOptions);
+    expect(result).toBe(false);
+    mkdirSpy.mockRestore();
+  });
+  test("should return false if could not  create file", () => {
+    const saveFile = new SaveFile();
+    // const mkdirSpy = jest.spyOn(fs, "mkdirSync").mockImplementation(() => {
+    //   throw new Error("This error was created for testing");
+    // });
+
+    const result = saveFile.execute({ fileContent: "Hola" });
+    expect(result).toBe(true);
   });
 });
