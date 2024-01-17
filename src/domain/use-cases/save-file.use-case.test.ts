@@ -52,11 +52,12 @@ describe("save-file.use-case", () => {
   });
   test("should return false if could not  create file", () => {
     const saveFile = new SaveFile();
-    // const mkdirSpy = jest.spyOn(fs, "mkdirSync").mockImplementation(() => {
-    //   throw new Error("This error was created for testing");
-    // });
+    const mkdirSpy = jest.spyOn(fs, "mkdirSync").mockImplementation(() => {
+      throw new Error("This error was created for testing");
+    });
 
     const result = saveFile.execute({ fileContent: "Hola" });
-    expect(result).toBe(true);
+    expect(result).toBe(false);
+    mkdirSpy.mockRestore();
   });
 });
