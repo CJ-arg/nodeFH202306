@@ -56,7 +56,6 @@ describe("Server App", () => {
     console.error = logErrorMock;
     CreateTable.prototype.execute = createMock;
     SaveFile.prototype.execute = saveFileMock;
-
     ServerApp.run(options);
 
     expect(logMock).toHaveBeenCalledWith("Server running...");
